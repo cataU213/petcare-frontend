@@ -1,0 +1,70 @@
+name: Publicar PetCare en GitHub Pages
+
+# Se ejecuta cuando hacemos cambios en la rama principal
+on:
+  push:
+    branches: ["principal"]
+
+  # También permite ejecutarlo manualmente desde Actions
+  workflow_dispatch:
+
+# Permisos necesarios para publicar en GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Descarga el código del repositorio
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      # Instala Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: "cuidado de mascotas-sencillo/package-lock.json"
+
+      # Instala las dependencias del proyecto
+      - name: Instalar dependencias
+        working-directory: "cuidado de mascotas-sencillo"
+        run: npm ci
+
+      # Compila React + Vite para GitHub Pages
+      - name: Compilar proyecto
+        working-directory: "cuidado de mascotas-sencillo"
+        run: npm run build -- --base=/petcare-frontend/
+
+      # Prepara GitHub Pages
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      # Sube la carpeta generada por Vite
+      - name: Subir sitio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "cuidado de mascotas-sencillo/dist"
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # Publica el sitio en GitHub Pages
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
