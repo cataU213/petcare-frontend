@@ -3,8 +3,7 @@ name: Publicar PetCare en GitHub Pages
 # Se ejecuta cuando hacemos cambios en la rama principal
 on:
   push:
-    branches: ["principal"]
-
+branches: ["main"]
   # También permite ejecutarlo manualmente desde Actions
   workflow_dispatch:
 
