@@ -1,9 +1,10 @@
 name: Publicar PetCare en GitHub Pages
 
-# Se ejecuta cuando hacemos cambios en la rama principal
+# Se ejecuta cuando hacemos cambios en la rama main
 on:
   push:
     branches: ["main"]
+
   # También permite ejecutarlo manualmente desde Actions
   workflow_dispatch:
 
@@ -32,16 +33,16 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: "cuidado de mascotas-sencillo/package-lock.json"
+          cache-dependency-path: "petcare-simple/package-lock.json"
 
       # Instala las dependencias del proyecto
       - name: Instalar dependencias
-        working-directory: "cuidado de mascotas-sencillo"
+        working-directory: "petcare-simple"
         run: npm ci
 
       # Compila React + Vite para GitHub Pages
       - name: Compilar proyecto
-        working-directory: "cuidado de mascotas-sencillo"
+        working-directory: "petcare-simple"
         run: npm run build -- --base=/petcare-frontend/
 
       # Prepara GitHub Pages
@@ -52,7 +53,7 @@ jobs:
       - name: Subir sitio
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "cuidado de mascotas-sencillo/dist"
+          path: "petcare-simple/dist"
 
   deploy:
     environment:
