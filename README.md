@@ -6,7 +6,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
-
+[![Ver sitio](https://img.shields.io/badge/🌐_Ver_sitio-000000?style=for-the-badge)](https://catau213.github.io/petcare-frontend/)
 ## 📝 Descripción
 
 PetCare es una aplicación desarrollada en equipo como proyecto integrador de Frontend II.
